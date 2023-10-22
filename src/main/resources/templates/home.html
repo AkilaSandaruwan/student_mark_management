@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Mark Management System - Home</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .top-bar {
+      background-color: #343a40;
+      color: #ffffff;
+      padding: 10px;
+      text-align: right;
+    }
+
+    .container {
+      margin-top: 20px;
+    }
+
+    .card {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <div class="container">
+    <!-- Display logged-in user's name -->
+    <span>Welcome, [[${#session.getAttribute('username')}]]! </span>
+    <!-- Logout button -->
+    <a href="/logout" class="btn btn-danger">Logout</a>
+  </div>
+</div>
+
+<!-- Content -->
+<div class="container">
+  <!-- Add Student Mark Button -->
+  <div class="card">
+    <div class="card-body">
+      <a href="/add-student" class="btn btn-success">Add Student Mark</a>
+    </div>
+  </div>
+
+  <!-- Student Mark Table -->
+  <div class="card">
+    <div class="card-header">
+      <h5>Student Mark Table</h5>
+    </div>
+    <div class="card-body">
+      <h4 th:if="${#lists.isEmpty(students)}">No data available to display</h4>
+      <table th:unless="${#lists.isEmpty(students)}" class="table table-bordered">
+        <thead>
+        <tr>
+          <th>School Name</th>
+          <th>Student Name</th>
+          <th>Subject</th>
+          <th>Grade</th>
+          <th>Mark</th>
+          <th>Teacher Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Table content goes here -->
+        <tr th:each="student: ${students}">
+          <td>[[${student.schoolName}]]</td>
+          <td>[[${student.studentName}]]</td>
+          <td>[[${student.subject}]]</td>
+          <td>[[${student.grade}]]</td>
+          <td>[[${student.mark}]]</td>
+          <td>[[${student.teacherName}]]</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
